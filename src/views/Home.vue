@@ -1,5 +1,8 @@
 <script setup>
-import { ref } from 'vue';
+import { onMounted, ref, watch, computed } from 'vue';
+import { globalStore } from '@store/globalStore.js'
+
+const store = globalStore()
 
 // Declaración de variables
 const products = ref([
@@ -11,12 +14,15 @@ const products = ref([
     { name: 'JAVA', value: 'mdi mdi-language-java', tipo: 'interno' },
     { name: 'CSS 3', value: 'mdi mdi-language-css3', tipo: 'interno' },
     // Controlar ícono claro u oscuro
-    { name: 'DJANGO', value: '/layout/images/icons/django-icon.png', tipo: 'externo' },
-    { name: 'POSTGRESQL', value: '/layout/images/icons/postgresql.png', tipo: 'externo' },
-    { name: 'FASTAPI', value: '/layout/images/icons/fastapi.png', tipo: 'externo' },
-    { name: 'FLASK', value: '/layout/images/icons/flask.png', tipo: 'externo' },
-    { name: 'MY SQL', value: '/layout/images/icons/mysql.png', tipo: 'externo' },
+    { name: 'DJANGO', value: `/layout/images/icons/django-${store.lightordarkmode ? 'light' : 'dark'}.png`, tipo: 'externo' },
+    { name: 'POSTGRESQL', value: `/layout/images/icons/postgresql-${store.lightordarkmode ? 'light' : 'dark'}.png`, tipo: 'externo' },
+    { name: 'FASTAPI', value: `/layout/images/icons/fastapi-${store.lightordarkmode ? 'light' : 'dark'}.png`, tipo: 'externo' },
+    { name: 'FLASK', value: `/layout/images/icons/flask-${store.lightordarkmode ? 'light' : 'dark'}.png`, tipo: 'externo' },
+    { name: 'MY SQL', value: `/layout/images/icons/mysql-${store.lightordarkmode ? 'light' : 'dark'}.png`, tipo: 'externo' },
 ])
+const computedProducts = computed(() => {
+    return products.value
+});
 
 const responsiveOptions = ref([
     {
@@ -26,7 +32,7 @@ const responsiveOptions = ref([
     },
     {
         breakpoint: '1199px',
-        numVisible: 2,
+        numVisible: 3,
         numScroll: 1
     },
     {
@@ -74,57 +80,38 @@ const responsiveOptions = ref([
                 </div>
             </div>
         </div>
-       <!-- Sección tecnologías -->
+        <!-- Sección tecnologías -->
         <div class="text-center">
             <Divider align="center" type="dotted">
                 <span class="text-xxl font-bold">Tecnologías</span>
             </Divider>
-            <Carousel :value="products" :numVisible="5" :numScroll="5" circular :autoplayInterval="2500"
-            :responsiveOptions="responsiveOptions">
+            <Carousel :value="computedProducts" circular :autoplayInterval="2500" :responsiveOptions="responsiveOptions"
+                :showIndicators="false">
                 <template #item="slotProps">
                     <div class="m-2 p-3 formgrid">
                         <div class="field mb-0">
                             <icon :class="slotProps.data.value" style="font-size: 5rem;"
                                 v-if="slotProps.data.tipo === 'interno'" />
-                            <i style="font-size: 5rem;" v-else>
-                                <img :src="slotProps.data.value" height="70" class="opacity-80">
-                            </i>
+                            <icon style="font-size: 5rem;" v-else>
+                                <img :src="slotProps.data.value" height="70">
+                            </icon>
                         </div>
                         <span>{{ slotProps.data.name }}</span>
                     </div>
                 </template>
             </Carousel>
         </div>
-        <div class="card bg-green-300 text-center">
+        <!-- <div class="card bg-green-300 text-center">
             Estudios (dentro de un carrousel)
         </div>
         <div class="card bg-purple-300 text-center">
             Proyectos (dentro de un carrousel)
-        </div>
+        </div> -->
     </div>
 </template>
 
 <style lang="scss" scoped>
 .custom-img {
     border-radius: 50%;
-}
-
-:deep(.customized-timeline) {
-    .p-timeline-event:nth-child(even) {
-        flex-direction: row !important;
-
-        .p-timeline-event-content {
-            text-align: left !important;
-        }
-    }
-
-    .p-timeline-event-opposite {
-        flex: 0;
-        padding: 0;
-    }
-
-    .p-card {
-        margin-top: 1rem;
-    }
 }
 </style>

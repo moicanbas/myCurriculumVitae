@@ -1,7 +1,7 @@
 <script setup>
 import Sidebar from 'primevue/sidebar';
 import { usePrimeVue } from 'primevue/config';
-import { ref, watch, computed, onMounted } from 'vue';
+import { ref, computed, onMounted } from 'vue';
 import { useLayout } from '@/layout/composables/layout';
 import { globalStore } from '@store/globalStore.js'
 
@@ -16,6 +16,7 @@ const store = globalStore()
 const themeOptions = ref(false)
 
 const { layoutConfig, layoutState } = useLayout();
+
 const themes = ref([
     { name: 'blue', color: '#0F8BFD' },
     { name: 'green', color: '#0BD18A' },
@@ -26,12 +27,6 @@ const themes = ref([
     { name: 'teal', color: '#00D0DE' },
     { name: 'yellow', color: '#EEE500' }
 ]);
-
-watch(layoutConfig.menuMode, (newVal) => {
-    if (newVal === 'static') {
-        layoutState.staticMenuDesktopInactive.value = false;
-    }
-});
 
 const changeTheme = (theme) => {
     const themeLink = document.getElementById('theme-link');
@@ -50,7 +45,6 @@ const chooseTheme = (newVal) =>{
 }
 
 const changeColorScheme = (colorScheme) => {
-    console.log('mode', colorScheme);
     const themeLink = document.getElementById('theme-link');
     const themeLinkHref = themeLink.getAttribute('href');
     const currentColorScheme = 'theme-' + layoutConfig.colorScheme.value.toString();

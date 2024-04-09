@@ -86,6 +86,7 @@ onMounted(() => {
                  Y ver como hacer con el tema de los colores-->
             <li class="md:mr-5 flex align-items-center">
                 <Button :icon="`pi ${checked ? 'pi-sun' : 'pi-moon'}`" outlined
+                    :severity="`${checked ? 'warning' : 'contrast'}`"
                     v-model="checked" @click="darkOrLightMode" text
                     v-tooltip.left="`Cambiar a modo ${checked ? 'claro' : 'oscuro'}`" />
             </li>
