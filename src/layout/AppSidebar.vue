@@ -29,24 +29,29 @@ const onMouseLeave = () => {
 const anchor = () => {
     layoutState.anchored.value = !layoutState.anchored.value;
 };
-const navigateToHome = () => {
-    router.push('/');
-};
+
+const navigateToHome = () => router.push('/')
+
 </script>
 
 <template>
     <div class="layout-sidebar" @mouseenter="onMouseEnter()" @mouseleave="onMouseLeave()">
-        <div class="sidebar-header">
+        <div class="sidebar-header flex justify-content-start">
             <a @click="navigateToHome" class="app-logo" style="cursor: pointer">
                 <div class="app-logo-small h-2rem">
-                    <img :src="'/layout/images/logo/logo-' + (layoutConfig.colorScheme.value === 'light' ? 'dark' : 'light') + '.png'" />
+                    <img
+                        :src="'/layout/images/logo/logo-' + (layoutConfig.colorScheme.value === 'light' ? 'dark' : 'light') + '.png'" />
                 </div>
                 <div class="app-logo-normal">
-                    <img class="h-2rem" :src="'/layout/images/logo/logo-' + (layoutConfig.colorScheme.value === 'light' ? 'dark' : 'light') + '.png'" />
-                    <img class="h-2rem ml-3" :src="'/layout/images/logo/appname-' + (layoutConfig.colorScheme.value === 'light' ? 'dark' : 'light') + '.png'" />
+                    <!-- <img class="h-2rem" :src="'/layout/images/logo/logo-' + (layoutConfig.colorScheme.value === 'light' ? 'dark' : 'light') + '.png'" />
+                    <img class="h-2rem ml-3" :src="'/layout/images/logo/appname-' + (layoutConfig.colorScheme.value === 'light' ? 'dark' : 'light') + '.png'" /> -->
                 </div>
             </a>
-            <Button class="layout-sidebar-anchor p-link z-2" type="button" @click="anchor()"></Button>
+            <Button class="layout-sidebar-anchor items-center justify-center" rounded type="button" @click="anchor"
+                v-tooltip.right="layoutState.anchored.value ? 'Desfijar' : 'Fijar'" text
+                :class="{ 'bg-blue-500': layoutState.anchored.value, 'text-white': layoutState.anchored.value }">
+                <icon class="mr-1" :class="`${layoutState.anchored.value ? 'mdi mdi-pin-outline' : 'mdi mdi-pin'}`" />
+            </Button>
         </div>
 
         <div class="layout-menu-container">

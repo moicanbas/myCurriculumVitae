@@ -55,13 +55,6 @@
 
                     .layout-sidebar-anchor {
                         display: none;
-                        padding: 0;
-                        width: 1.388rem;
-                        height: 1.25rem;
-                        border-radius: 50%;
-                        border: 2px solid var(--primary-color);
-                        background-color: transparent;
-                        transition: background-color var(--transition-duration), transform 0.3s;
                     }
                 }
 
@@ -276,7 +269,7 @@
             &.layout-sidebar-anchored {
                 .sidebar-header {
                     .layout-sidebar-anchor {
-                        background-color: var(--primary-color);
+                        margin: 0;
                     }
                 }
 
