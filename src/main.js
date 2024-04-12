@@ -107,6 +107,7 @@ import TreeSelect from 'primevue/treeselect';
 import TreeTable from 'primevue/treetable';
 import TriStateCheckbox from 'primevue/tristatecheckbox';
 import VirtualScroller from 'primevue/virtualscroller';
+import { createI18n } from 'vue-i18n';
 
 import BlockViewer from '@/components/BlockViewer.vue';
 
@@ -227,4 +228,16 @@ app.component('TreeTable', TreeTable);
 app.component('TriStateCheckbox', TriStateCheckbox);
 app.component('VirtualScroller', VirtualScroller);
 
+import es from '@/locales/es.json';
+import en from '@/locales/en.json';
+
+const i18n = createI18n({
+    legacy: false,
+    locale: navigator.language.startsWith('es') ? 'es' : 'en',
+    fallbackLocale: 'es',
+    globalInjection: true,
+    messages: { es, en }
+});
+
+app.use(i18n)
 app.mount('#app');

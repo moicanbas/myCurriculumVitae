@@ -8,6 +8,11 @@ const props = defineProps({
 // Declaración de variables
 const responsiveOptions = ref([
     {
+        breakpoint: '3400px',
+        numVisible: 5,
+        numScroll: 1
+    },
+    {
         breakpoint: '1400px',
         numVisible: 5,
         numScroll: 1
@@ -30,7 +35,6 @@ const responsiveOptions = ref([
 ]);
 
 </script>
-
 <template>
     <Carousel :value="props.items" circular :autoplayInterval="3200" :responsiveOptions="responsiveOptions"
         :showIndicators="false">

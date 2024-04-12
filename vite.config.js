@@ -1,6 +1,7 @@
 import { fileURLToPath, URL } from 'node:url';
 import { defineConfig } from 'vite';
 import vue from '@vitejs/plugin-vue';
+import { resolve, dirname } from 'node:path';
 
 // https://vitejs.dev/config/
 export default defineConfig(() => {
@@ -12,7 +13,7 @@ export default defineConfig(() => {
                         isCustomElement: (tag) => ['md-linedivider'].includes(tag)
                     }
                 }
-            })
+            }),
         ],
         resolve: {
             alias: {
@@ -22,7 +23,7 @@ export default defineConfig(() => {
             }
         },
         server: {
-            host: true,
+            host: true
         }
     };
 });
