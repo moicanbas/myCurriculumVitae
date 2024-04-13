@@ -6,7 +6,6 @@ import { resolve, dirname } from 'node:path';
 // https://vitejs.dev/config/
 export default defineConfig(() => {
     return {
-        base:'/myCurriculumVitae/',
         plugins: [
             vue({
                 template: {

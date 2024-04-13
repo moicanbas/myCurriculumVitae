@@ -70,7 +70,6 @@ const langs = ref([
     }
 ]);
 
-
 onMounted(() => {
     checked.value = store.lightordarkmode
     changeColorScheme(checked.value ? 'dark' : 'light')

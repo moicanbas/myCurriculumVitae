@@ -106,6 +106,48 @@ const experience = [
     }
 ];
 
+async function obtenerDatosPDF(ubicacionArchivo) {
+  try {
+    const respuesta = await fetch(ubicacionArchivo);
+
+    // Verificar si la solicitud fue exitosa
+    if (!respuesta.ok) {
+      throw new Error('No se pudo cargar el archivo PDF.');
+    }
+
+    // Convertir la respuesta a un Blob
+    const blob = await respuesta.blob();
+    
+    return blob;
+  } catch (error) {
+    console.error('Error al obtener el archivo PDF:', error);
+    throw error;
+  }
+}
+
+const descargarPDF = async () => {
+    try {
+        const pdfBlob = await obtenerDatosPDF('/layout/files/cv_updated.pdf');
+        
+        // Crear un enlace temporal para descargar el archivo
+        const url = window.URL.createObjectURL(pdfBlob);
+        const link = document.createElement('a');
+        link.href = url;
+        link.setAttribute('download', 'cv_moises.pdf');
+
+        // Simular clic en el enlace para iniciar la descarga
+        document.body.appendChild(link);
+        link.click();
+
+        // Limpiar
+        window.URL.revokeObjectURL(url);
+        document.body.removeChild(link);
+    } catch (error) {
+        console.error('Error al descargar el PDF:', error);
+    }
+}
+
+
 const computedItems = computed(() => {
     return tecnologies.value = [
         { name: 'GIT', value: 'mdi mdi-git', tipo: 'interno' },
@@ -128,7 +170,7 @@ const computedItems = computed(() => {
 watchEffect(() => {
     const handleResize = () => {
         shouldShowDivider.value = window.innerWidth > 1200;
-        imageStyle.value = window.innerWidth > 1200 ? 165 : 115;
+        imageStyle.value = window.innerWidth > 1200 ? 165 : 110;
     };
 
     window.addEventListener('resize', handleResize);
@@ -158,6 +200,7 @@ watchEffect(() => {
                         <p class="italic">
                             {{ $t('description') }}
                         </p>
+                        <Button class="mt-0" icon="pi pi-download" :label="$t('downloadCV')" text @click="descargarPDF"/>
                     </div>
                     <!-- <div class="mt-1 opacity-70">
                         <i class="mdi mdi-github mr-2" style="font-size: 2rem" />
@@ -206,14 +249,6 @@ watchEffect(() => {
             </Carousel>
         </div>
         <!-- Fin sección proyectos -->
-        <!-- Inicio sección tecnologías -->
-        <div class="text-center">
-            <Divider align="center" type="dotted" class="mt-4">
-                <span class="text-2xl font-bold">{{ $t('tecs') }}</span>
-            </Divider>
-            <Carrusel :items="computedItems" />
-        </div>
-        <!-- Fin sección tecnologías -->
         <!-- Inicio sección experiencia -->
         <div class="grid formgrid">
             <Divider align="center" type="dotted">
@@ -240,6 +275,14 @@ watchEffect(() => {
             </div>
         </div>
         <!-- Fin sección experiencia -->
+        <!-- Inicio sección tecnologías -->
+        <div class="text-center">
+            <Divider align="center" type="dotted" class="mt-4">
+                <span class="text-2xl font-bold">{{ $t('tecs') }}</span>
+            </Divider>
+            <Carrusel :items="computedItems" />
+        </div>
+        <!-- Fin sección tecnologías -->
         <!-- Inicio sección sobre mí -->
 
         <!-- Fin sección sobre mí -->

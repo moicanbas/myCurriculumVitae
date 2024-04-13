@@ -188,38 +188,29 @@ const checkActiveRoute = (item) => {
 </script>
 
 <template>
-    <li ref="menuItemRef" :class="{ 'layout-root-menuitem': root, 'active-menuitem': isStatic || isOverlay || isDrawer || isReveal ? !root && isActiveMenu : isActiveMenu }">
-        <div v-if="root && item.visible !== false" class="layout-menuitem-root-text">{{ item.label }}</div>
-        <a
-            v-if="(!item.to || item.items) && item.visible !== false"
-            :href="item.url"
-            @click="itemClick($event, item, index)"
-            :class="item.class"
-            :target="item.target"
-            tabindex="0"
-            @mouseenter="onMouseEnter"
-            v-tooltip.hover="isSlim && root && !isActiveMenu ? item.label : null"
-        >
+    <li ref="menuItemRef"
+        :class="{ 'layout-root-menuitem': root, 'active-menuitem': isStatic || isOverlay || isDrawer || isReveal ? !root && isActiveMenu : isActiveMenu }">
+        <div v-if="root && item.visible !== false" class="layout-menuitem-root-text">{{ $t(item.label) }}</div>
+        <a v-if="(!item.to || item.items) && item.visible !== false" :href="item.url"
+            @click="itemClick($event, item, index)" :class="item.class" :target="item.target" tabindex="0"
+            @mouseenter="onMouseEnter" v-tooltip.hover="isSlim && root && !isActiveMenu ? item.label : null">
             <i :class="item.icon" class="layout-menuitem-icon"></i>
-            <span class="layout-menuitem-text">{{ item.label }}</span>
+            <span class="layout-menuitem-text">{{ $t(item.label) }}</span>
             <i class="pi pi-fw pi-angle-down layout-submenu-toggler" v-if="item.items"></i>
         </a>
-        <router-link
-            v-if="item.to && !item.items && item.visible !== false"
-            @click="itemClick($event, item, index)"
-            :class="[item.class, { 'active-route': checkActiveRoute(item) }]"
-            tabindex="0"
-            :to="item.to"
+        <router-link v-if="item.to && !item.items && item.visible !== false" @click="itemClick($event, item, index)"
+            :class="[item.class, { 'active-route': checkActiveRoute(item) }]" tabindex="0" :to="item.to"
             @mouseenter="onMouseEnter"
-            v-tooltip.hover="(isSlim || isSlimPlus) && root && !isActiveMenu ? item.label : null"
-        >
+            v-tooltip.hover="(isSlim || isSlimPlus) && root && !isActiveMenu ? item.label : null">
             <i :class="item.icon" class="layout-menuitem-icon"></i>
-            <span class="layout-menuitem-text">{{ item.label }}</span>
+            <span class="layout-menuitem-text">{{ $t(item.label) }}</span>
             <i class="pi pi-fw pi-angle-down layout-submenu-toggler" v-if="item.items"></i>
         </router-link>
 
         <ul ref="subMenuRef" :class="{ 'layout-root-submenulist': root }" v-if="item.items && item.visible !== false">
-            <app-menu-item v-for="(child, i) in item.items" :key="child" :index="i" :item="child" :parentItemKey="itemKey" :root="false" :rootIndex="props.index"></app-menu-item>
+            <app-menu-item v-for="(child, i) in item.items" :key="child" :index="i" :item="child"
+                :parentItemKey="itemKey" :root="false" :rootIndex="props.index"></app-menu-item>
         </ul>
     </li>
+
 </template>

@@ -4,8 +4,17 @@
     "tecs": "Tecnologías",
     "description":"Explorador intrépido en el laberinto de la vida, navegando entre los desafíos y las alegrías con la destreza de un equilibrista y la curiosidad de un niño. Su historia es un testamento a la resiliencia y al poder transformador del amor y la amistad en el viaje del alma hacia la plenitud.",
     "projects": "Proyectos",
-    "sourceCode" :"Ver código fuente",
+    "backSourceCode" :"Ver código back-end",
+    "frontSourceCode" :"Ver código front-end",
     "goLive": "Ver en vivo",
     "experience": "Experiencia",
-    "lang": "Idiomas"
+    "lang": "Idiomas",
+    "menu": "Menú",
+    "home": "Inicio",
+    "project1":"ERP Empleados",
+    "project2":"Inventario de Productos",
+    "gitProfile": "Ver perfil de Github",
+    "sendEmail": "Enviar un correo electrónico",
+    "inProfile": "Ver perfil de Linkedin",
+    "downloadCV": "Descargar cv"
 }

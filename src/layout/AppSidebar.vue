@@ -56,6 +56,14 @@ const navigateToHome = () => router.push('/')
 
         <div class="layout-menu-container">
             <AppMenu />
+            <div v-if="layoutState.sidebarActive.value" class="mt-1 opacity-70 flex justify-content-center">
+                <a href="https://github.com/moicanbas/" target="_blank"><i class="mdi mdi-github mr-2"
+                        v-tooltip.right="$t('gitProfile')" style="font-size: 2rem" /></a>
+                <a href="mailto:moicanbas@gmail.com"><i class="mdi mdi-gmail mr-2" v-tooltip.right="$t('sendEmail')"
+                        style="font-size: 2rem" /></a>
+                <a href="https://www.linkedin.com/in/moises-cantillo-bastidas201999/" target="_blank"><i
+                        class="mdi mdi-linkedin" v-tooltip.right="$t('inProfile')" style="font-size: 2rem" /></a>
+            </div>
         </div>
     </div>
 </template>

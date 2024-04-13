@@ -8,5 +8,13 @@
     "frontSourceCode" :"View front-end source code",
     "goLive": "Go to live",
     "experience": "Experience",
-    "lang": "Languages"
+    "lang": "Languages",
+    "menu": "Menu",
+    "home": "Home",
+    "project1": "ERP Employees",
+    "project2": "Products Inventory",
+    "gitProfile": "View Github profile",
+    "sendEmail": "Send E-mail",
+    "inProfile": "View Linkedin profile",
+    "downloadCV": "Download cv"
 }
